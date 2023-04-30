@@ -30,7 +30,7 @@ function VideoBackground() {
     <div className="video-background">
       <Element name="video" className="element">
         <video className="video" autoPlay muted loop>
-          <source src="~/my0app/src/components/ball.mp4" type="video/mp4" />
+          <source src="/ball.mp4" type="video/mp4" />
         </video>
       </Element>
       <div className="content">

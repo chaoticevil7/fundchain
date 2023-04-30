@@ -11,7 +11,7 @@ function App() {
           <div className="intro">
             <h1>FUND</h1>
             <h2>CHAIN</h2>
-            <video src="ball.mp4"></video>
+            <video src="/ball.mp4"></video>
           </div> 
         </div>
         <div className="rectangle">
