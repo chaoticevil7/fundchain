@@ -1,11 +1,11 @@
 import React from 'react';
-import VideoBackground from './components/VideoBackground';
+//import VideoBackground from './components/VideoBackground'; 
 import './style.css';
 
 function App() {
   return (
     <div className="App">
-      <VideoBackground />
+      {/* <VideoBackground /> */}
       <div className="content">
         <div className="animation">
           <div className="intro">
