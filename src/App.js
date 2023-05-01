@@ -1,6 +1,10 @@
 import React from 'react';
 import VideoBackground from './components/VideoBackground';
 import './style.css';
+import * as ScrollMagic from 'scrollmagic';
+import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
+import 'scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap';
+import gsap from 'gsap';
 
 function App() {
   return (
@@ -33,5 +37,18 @@ function App() {
     </div>
   );
 }
+
+const controller = new ScrollMagic.Controller();
+
+const scene1 = new ScrollMagic.Scene({
+  triggerElement: '.animation',
+  duration: '100%'
+})
+.setTween('.video-container video', {
+  opacity: 0,
+  duration: 2
+})
+.addTo(controller);
+
 
 export default App;
