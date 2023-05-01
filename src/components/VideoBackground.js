@@ -1,39 +1,39 @@
 import React, { useEffect } from 'react';
 import { Element } from 'react-scroll';
 
+import styles from '../styles/VideoBackground.module.css';
+
 function VideoBackground() {
   useEffect(() => {
-    const video = document.querySelector('.video');
-    const element = document.querySelector('.element');
+    const video = document.querySelector(`.${styles.video}`);
+    const element = document.querySelector(`.${styles.element}`);
 
-    // Add the 'video-play' class to the video element when the top of the
-    // 'element' component reaches the top of the viewport
     const handleScroll = () => {
       const rect = element.getBoundingClientRect();
       if (rect.top <= 0) {
-        video.classList.add('video-play');
+        video.classList.add(styles['video-play']);
       } else {
-        video.classList.remove('video-play');
+        video.classList.remove(styles['video-play']);
       }
     }
 
-    // Attach the event listener to the scroll event
     window.addEventListener('scroll', handleScroll);
 
-    // Clean up the event listener on unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div className="video-background">
-      <Element name="video" className="element">
-        <video className="video" autoPlay muted loop>
-          <source src="/ball.mp4" type="video/mp4" />
-        </video>
+    <div className={styles['video-background']}>
+      <Element name="video" className={styles.element}>
+      <video className={styles.video} autoPlay muted loop>
+        <source src={`${process.env.PUBLIC_URL}/ball.mp4`} type="video/mp4" />
+        <source src={`${process.env.PUBLIC_URL}/ball.webm`} type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
       </Element>
-      <div className="content">
+      <div className={styles.content}>
         {/* Content goes here */}
       </div>
     </div>
@@ -41,4 +41,3 @@ function VideoBackground() {
 }
 
 export default VideoBackground;
-
