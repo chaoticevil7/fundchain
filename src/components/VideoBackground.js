@@ -1,40 +1,58 @@
-import React, { useEffect } from 'react';
-import { Element } from 'react-scroll';
-
+import React, { useEffect, useRef } from 'react';
 import styles from '../styles/VideoBackground.module.css';
+import ScrollMagic from 'scrollmagic';
+import { gsap } from 'gsap';
 
 function VideoBackground() {
+  const videoRef = useRef(null);
+
   useEffect(() => {
-    const video = document.querySelector(`.${styles.video}`);
-    const element = document.querySelector(`.${styles.element}`);
-
-    const handleScroll = () => {
-      const rect = element.getBoundingClientRect();
-      if (rect.top <= 0) {
-        video.classList.add(styles['video-play']);
-      } else {
-        video.classList.remove(styles['video-play']);
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll);
-
+    const controller = new ScrollMagic.Controller();
+    
+    const scene = new ScrollMagic.Scene({
+      triggerElement: videoRef.current,
+      triggerHook: 0.5,
+      duration: '100%',
+    })
+      .addTo(controller)
+      .on('enter', () => {
+        videoRef.current.play();
+      })
+      .on('leave', () => {
+        videoRef.current.pause();
+      });
+  
+    const tween = gsap.to(videoRef.current, {
+      opacity: 1,
+      y: -100,
+    });
+  
+    const scene2 = new ScrollMagic.Scene({
+      triggerElement: videoRef.current,
+      triggerHook: 0.5,
+      duration: '100%',
+    })
+      .setTween(tween)
+      .addTo(controller);
+      
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      scene.destroy(true);
+      scene2.destroy(true);
+      controller.destroy(true);
     };
   }, []);
+  
 
   return (
     <div className={styles['video-background']}>
-      <Element name="video" className={styles.element}>
-      <video className={styles.video} autoPlay muted loop>
+      <video ref={videoRef} className={styles.video} autoPlay loop muted>
         <source src={`${process.env.PUBLIC_URL}/ball.mp4`} type="video/mp4" />
-        <source src={`${process.env.PUBLIC_URL}/ball.webm`} type="video/webm" />
-        Your browser does not support the video tag.
       </video>
-      </Element>
       <div className={styles.content}>
-        {/* Content goes here */}
+        <div className={styles.centered}>
+          <h1 className={styles.title} data-aos="fade-up">Welcome to my website</h1>
+          <p className={styles.subtitle} data-aos="fade-up" data-aos-delay="500">I am a React developer</p>
+        </div>
       </div>
     </div>
   );
