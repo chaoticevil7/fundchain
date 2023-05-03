@@ -10,10 +10,12 @@
     "gsap": "^3.11.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gsap": "^3.2.1",
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.9",
+    "react-scrollmagic": "^2.3.0",
     "scroll": "^3.0.1",
-    "scrollmagic": "^2.0.8",
+    "scrollmagic-plugin-gsap": "^1.0.4",
     "web-vitals": "^3.3.1"
   },
   "scripts": {
